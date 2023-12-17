@@ -1,0 +1,13 @@
+/* Style for the LineChart */
+.staircase-chart {
+    -fx-stroke-type: outside;
+}
+
+/* Style for the data series */
+.staircase-series .chart-line-symbol {
+    -fx-background-color: transparent;
+}
+.staircase-series .chart-series-line {
+    -fx-stroke-width: 1px;
+    -fx-stroke-line-cap: butt;
+}
