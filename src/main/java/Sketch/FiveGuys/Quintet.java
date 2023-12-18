@@ -125,8 +125,8 @@ public class Quintet {
 
         // 4. Cut in chunks
         Harmony chordSeriesVlA = (Harmony) chordSeriesVL.cut(0,60*Duration.second());
-        Harmony chordSeriesVLB = (Harmony) chordSeriesVL.cut(60*Duration.second()+1, 60*2*Duration.second());
-        chordSeriesVLB.translate(-60*Duration.second()-1); // to start at 0
+        Harmony chordSeriesVLB = (Harmony) chordSeriesVL.cut(60*Duration.second(), 60*2*Duration.second());
+        chordSeriesVLB = (Harmony) chordSeriesVLB.translate(-60*Duration.second()); // to start at 0
 
         //------------------------------------------------------------------------------------------------------
         //

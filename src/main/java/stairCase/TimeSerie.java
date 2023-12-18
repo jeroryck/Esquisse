@@ -74,8 +74,10 @@ public abstract class TimeSerie<T> {
             Boolean found = false;
             int i = 0;
             while ((!found) && (i < this.stepRanges.length)) {
-                if ((stepRanges[i] <= min) && (min < stepRanges[i + 1]))
+                if ((stepRanges[i] <= min) && (min < stepRanges[i + 1])) {
                     found = true;
+                    minPos = i;
+                }
                 else i++;
             }
         }
@@ -89,8 +91,10 @@ public abstract class TimeSerie<T> {
             Boolean found = false;
             int i = 0;
             while ((!found) && (i < this.stepRanges.length)) {
-                if ((stepRanges[i] <= max) && (max < stepRanges[i + 1]))
+                if ((stepRanges[i] <= max) && (max < stepRanges[i + 1])) {
                     found = true;
+                    maxPos = i;
+                }
                 else i++;
             }
             maxPos = i;
@@ -103,12 +107,12 @@ public abstract class TimeSerie<T> {
         List<T> heightsList = new ArrayList<>();
         List<Integer> stepList = new ArrayList<>();
         // We add a new pos if the cut is between two positions
-        if (min>stepRanges[minPos]) {
+        if (min >= stepRanges[minPos]) {
             heightsList.add(this.getValue(min));
             stepList.add(min);
         }
         // core work
-        for (int i = minPos; i < maxPos ; i++) {
+        for (int i = minPos+1; i < maxPos ; i++) {
             heightsList.add(heights[i]);
             stepList.add(stepRanges[i]);
         }
