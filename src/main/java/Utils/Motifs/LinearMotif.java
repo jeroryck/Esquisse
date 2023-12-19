@@ -5,7 +5,7 @@ import Concepts.ListRangedValues;
 
 import java.util.List;
 
-// This motif generate a given series of integers.
+// This motif generate a given series .
 public class LinearMotif<T> extends Motif {
     private List<T> base;
     private int state;

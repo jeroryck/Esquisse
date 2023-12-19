@@ -55,7 +55,7 @@ public class ScoreB {
         List<HarmonicPitch.Move> baseMotifChordTonesV1b = FastInput.hp(new int[]{-1,-1,1});
         OrMotif baseMotifChordTonesV1 = new OrMotif(new Motif[]{
                 new LinearMotif(baseMotifChordTonesV1b),new LinearMotif(baseMotifChordTonesV1a)});
-        List<Duration> baseMotifDurationV1 = FastInput.dur(new int[]{NOIRE,NOIRE,NOIRE,BLANCHE});
+        List<Duration> baseMotifDurationV1 = FastInput.dur(new int[]{BLANCHE,BLANCHE,BLANCHE,RONDE});
         LoopMotif<HarmonicPitch.Move> motifChordTonesV1 =
                 new LoopMotif<>(baseMotifChordTonesV1,3000); // arbitrary high (unused)
         LoopMotif<Duration> motifDurationV1 =
@@ -76,7 +76,7 @@ public class ScoreB {
 
             // Apply the underlying harmony
             Chord currentHarmonyChord = underlyingHarmony.getValue(violinChordTones.length());
-            newValue.changeChord(currentHarmonyChord);
+            newValue = newValue.changeChord(currentHarmonyChord);
 
             violinChordTones.addValue(newValue);
             violinChordTones.addRange((Duration) motifDurationV1.currentValue);
@@ -84,6 +84,18 @@ public class ScoreB {
 
         violin1 = violinChordTones.asSoundPhrase();
         violin1PitchRange.reframe(violin1);
+
+        //-------------------------------------------------------------------------------------------
+        // Violin 2 part
+
+        List<Duration> bMDV2a1 = FastInput.dur(new int[]{CROCHE,CROCHE,CROCHE,CROCHE});
+        LoopMotif MDV2a1 = new LoopMotif<Duration>(new LinearMotif<Duration>(bMDV2a1),2);
+        List<Duration> bMDV2b1 = FastInput.dur(new int[]{CROCHE,NOIRE+CROCHE});
+        LoopMotif MDV2b1 = new LoopMotif<Duration>(new LinearMotif<Duration>(bMDV2b1),2);
+        OrMotif<Duration> MDV2c = new OrMotif<Duration>(new Motif[]{
+                new LinearMotif<Duration>(bMDV2a1)  , new LinearMotif<Duration>(bMDV2b1)});
+
+
     }
 
     public void populate(){
