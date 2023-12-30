@@ -59,7 +59,7 @@ public class ScoreB {
         LoopMotif<HarmonicPitch.Move> motifChordTonesV1 =
                 new LoopMotif<>(baseMotifChordTonesV1,3000); // arbitrary high (unused)
         LoopMotif<Duration> motifDurationV1 =
-                new LoopMotif<Duration>(new LinearMotif<Duration>(baseMotifDurationV1),3000);
+                new LoopMotif<>(FastInput.durationMotifFromString("(2 2 2 1)"),3000);
 
         // Generation of the sequence of chordTones
         ListRangedHarmonicPitch violinChordTones = new ListRangedHarmonicPitch();

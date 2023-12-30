@@ -137,6 +137,21 @@ package Concepts;
      public Duration(){intValue = DEFAULT_DURATION;}
      public Duration(int someint){intValue = someint;}
 
+     // Constructor from string in Lilypond style
+     public Duration(String s){
+         switch (s){
+             case "1" : intValue = RONDE;break;
+             case "2" : intValue = BLANCHE;break;
+             case "4" : intValue = NOIRE;break;
+             case "8" : intValue = CROCHE;break;
+             case "16" : intValue = DOUBLE;break;
+             case "32" : intValue = TRIPLE;break;
+             case "64" : intValue = QUADRUPLE;break;
+             case "128" : intValue = QUINTUPLE;break;
+             default: throw new RuntimeException("bad string specification for Duration : "+s);
+         }
+     }
+
      public static void main(String[] args) {
          int num = 1000; // The integer to be decomposed
          System.out.println("Decomposition of " + num + " into powers of 2:");
