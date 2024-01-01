@@ -133,6 +133,15 @@ package Concepts;
          return result;
      }
 
+     //--------------------------------------------------------------------------------------------------------------
+
+     public void add(Duration durAdded) {
+         this.intValue = this.intValue+durAdded.intValue;
+     }
+
+     //---------------------------------------------------------------------------------------------------------------
+     //
+     // Constructors
 
      public Duration(){intValue = DEFAULT_DURATION;}
      public Duration(int someint){intValue = someint;}

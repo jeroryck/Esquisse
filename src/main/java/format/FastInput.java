@@ -2,10 +2,11 @@ package format;
 
 import Concepts.Duration;
 import Concepts.HarmonicPitch;
+import Concepts.Pitch;
 import Utils.Motifs.Motif;
-import format.durationGrammar.DurationMotifBuilder;
-import format.durationGrammar.durationMotifGLexer;
-import format.durationGrammar.durationMotifGParser;
+import format.durationGrammar.motifBuilder;
+import format.durationGrammar.motifGrammarLexer;
+import format.durationGrammar.motifGrammarParser;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
@@ -39,17 +40,17 @@ public class FastInput {
     }
 
     // Construct Motifs from a string specification
-    public static Motif<Duration> durationMotifFromString(String s){
+    public static Motif durationMotifFromString(String s){
 
         CharStream sourceStream = CharStreams.fromString(s);
-        durationMotifGLexer lexer = new durationMotifGLexer(sourceStream);
+        motifGrammarLexer lexer = new motifGrammarLexer(sourceStream);
         // create a parser that feeds from the tokens buffer
-        durationMotifGParser parser = new durationMotifGParser(new CommonTokenStream((TokenSource) lexer));
+        motifGrammarParser parser = new motifGrammarParser(new CommonTokenStream((TokenSource) lexer));
 
         ParseTree tree = (ParseTree) parser.main(); // begin parsing at patch rule
         System.out.println(tree.toStringTree( (Parser) parser)); // print LISP-style tree
 
-        DurationMotifBuilder dmb = new DurationMotifBuilder();
+        motifBuilder dmb = new motifBuilder();
         return dmb.asMotif(tree);
     }
 
@@ -57,9 +58,26 @@ public class FastInput {
 //---------------------------------------------------------------------------------------------------------------------
 
     public static void main(String[] args) {
-        String testString = "(32 8 4)";
+        String testString = "(32 [32 4] 4)";
 
         Motif<Duration> result = durationMotifFromString(testString);
+
+        result.start();
+        for (int i = 0; i < 50; i++) {
+            if (!result.hasNext()) break;
+            result.next();
+            System.out.println(result.currentValue.intValue);
+        }
+
+        testString = "([cis 2] [e 3])";
+        Motif<Pitch> resultP = durationMotifFromString(testString);
+
+        resultP.start();
+        for (int i = 0; i < 50; i++) {
+            if (!resultP.hasNext()) break;
+            resultP.next();
+            System.out.println(resultP.currentValue.index);
+        }
 
     }
 }

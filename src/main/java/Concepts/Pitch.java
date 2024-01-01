@@ -198,5 +198,27 @@ public class Pitch implements Sound {
             this.index = i;
         }
 
+        // form a string like "a''"
         public Pitch(String s) {this.index = Pitch.asInt(s);}
+
+        // from a string like "ees" and an octave number
+    public Pitch(String s, int octave){
+        int pitchPos;
+        switch (s) {
+            case "c","bis" : pitchPos=0;break;
+            case "cis","des" : pitchPos=1;break;
+            case "d" : pitchPos=2;break;
+            case "dis","ees" : pitchPos=3;break;
+            case "e","fes" : pitchPos=4;break;
+            case "eis","f" : pitchPos=5;break;
+            case "fis","ges" : pitchPos=6;break;
+            case "g" : pitchPos=7;break;
+            case "gis","aes" : pitchPos=8;break;
+            case "a" : pitchPos = 9;break;
+            case "ais","bes" : pitchPos=10;break;
+            case "b","ces" : pitchPos=11;break;
+            default: throw new RuntimeException("bad pitch name in pitch constructor :"+s);
+        }
+        this.index = pitchPos+12*octave;
+    }
     }
