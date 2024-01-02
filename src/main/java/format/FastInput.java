@@ -69,7 +69,7 @@ public class FastInput {
             System.out.println(result.currentValue.intValue);
         }
 
-        testString = "([cis 2] [e 3])";
+        testString = "(cis.o2 e ais.o-)";
         Motif<Pitch> resultP = durationMotifFromString(testString);
 
         resultP.start();

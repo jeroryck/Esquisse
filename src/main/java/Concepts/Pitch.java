@@ -5,7 +5,9 @@
 package Concepts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static Concepts.Interval.OCTAVE;
 
@@ -42,6 +44,39 @@ public class Pitch implements Sound {
 
         static final String[] noteNames = {"c", "cis", "d", "ees","e", "f","fis","g","aes","a","bes","b"};
         static final String[] octaveSymbol = {",,,",",,",",","","'","''","'''","''''"};
+
+        static final Map<String, Integer> pitchNameToInteger = new HashMap<>();
+
+        static {   pitchNameToInteger.put("c",0);
+            pitchNameToInteger.put("bes",0);
+            pitchNameToInteger.put("cis",1);
+            pitchNameToInteger.put("des",1);
+            pitchNameToInteger.put("d",2);
+            pitchNameToInteger.put("dis",3);
+            pitchNameToInteger.put("ees",3);
+            pitchNameToInteger.put("e",4);
+            pitchNameToInteger.put("fes",4);
+            pitchNameToInteger.put("f",5);
+            pitchNameToInteger.put("eis",5);
+            pitchNameToInteger.put("fis",6);
+            pitchNameToInteger.put("ges",6);
+            pitchNameToInteger.put("g",7);
+            pitchNameToInteger.put("gis",8);
+            pitchNameToInteger.put("aes",8);
+            pitchNameToInteger.put("a",9);
+            pitchNameToInteger.put("ais",10);
+            pitchNameToInteger.put("bes",10);
+            pitchNameToInteger.put("b",11);
+            pitchNameToInteger.put("ces",11);
+        }
+
+        static final Map<String, Integer> octaveModifierToInteger = new HashMap<>();
+        static {
+            octaveModifierToInteger.put("o++'",2);
+            octaveModifierToInteger.put("o+",1);
+            octaveModifierToInteger.put("o-",-1);
+            octaveModifierToInteger.put("o--",-2);
+        }
 
         //---------------------------------------------------------------------------------------------------
 
@@ -203,22 +238,13 @@ public class Pitch implements Sound {
 
         // from a string like "ees" and an octave number
     public Pitch(String s, int octave){
-        int pitchPos;
-        switch (s) {
-            case "c","bis" : pitchPos=0;break;
-            case "cis","des" : pitchPos=1;break;
-            case "d" : pitchPos=2;break;
-            case "dis","ees" : pitchPos=3;break;
-            case "e","fes" : pitchPos=4;break;
-            case "eis","f" : pitchPos=5;break;
-            case "fis","ges" : pitchPos=6;break;
-            case "g" : pitchPos=7;break;
-            case "gis","aes" : pitchPos=8;break;
-            case "a" : pitchPos = 9;break;
-            case "ais","bes" : pitchPos=10;break;
-            case "b","ces" : pitchPos=11;break;
-            default: throw new RuntimeException("bad pitch name in pitch constructor :"+s);
-        }
+        int pitchPos = pitchNameToInteger.get(s);
         this.index = pitchPos+12*octave;
+    }
+
+    // With args like cis
+    public Pitch(String pitchName, String octaveModifier,int octave){
+        int pitchPos = pitchNameToInteger.get(pitchName);
+        this.index = pitchPos+(octave+octaveModifierToInteger.get(octaveModifier))*12;
     }
     }

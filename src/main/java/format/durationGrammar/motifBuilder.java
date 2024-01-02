@@ -1,6 +1,7 @@
 package format.durationGrammar;
 
 import Concepts.Duration;
+import Concepts.HarmonicPitch;
 import Concepts.Pitch;
 import Utils.Motifs.LinearMotif;
 import Utils.Motifs.Motif;
@@ -43,7 +44,7 @@ public class motifBuilder extends motifGrammarBaseVisitor {
 
         List<Pitch> lPitch = new ArrayList<>();
         for (int i = 0; i < ctx.pitch().size(); i++) {
-            lPitch.add(i, visitPitch(ctx.pitch(i)));
+            lPitch.add(i, (Pitch) visitPitch(ctx.pitch(i)));
         }
 
         LinearMotif<Pitch> linearMotif = new LinearMotif<>(lPitch);
@@ -51,6 +52,8 @@ public class motifBuilder extends motifGrammarBaseVisitor {
     }
 
     //---------------------------------------------------------------------------------------------------------------
+    //
+    // Durations
 
     public Duration visitSimpleDuration(motifGrammarParser.SimpleDurationContext sdc){
         return new Duration(sdc.getText());
@@ -68,8 +71,46 @@ public class motifBuilder extends motifGrammarBaseVisitor {
         return result;
     }
 
+    //--------------------------------------------------------------------------------------------------------------
+    //
+    // Pitchs
+
+    // used for the simple pitch (no octave specification). This value could be set by previous pitch specification
+    // with octave specification or modirier.
+    private int currentOctave= 3;
+
     @Override
-    public Pitch visitPitch(motifGrammarParser.PitchContext ctx) {
+    public Pitch visitAbsolutePitch(motifGrammarParser.AbsolutePitchContext ctx) {
+        String pitchName = ctx.pitchName().getText();
+        Integer octaveNumber = Integer.valueOf(ctx.octaveNumber().getText().substring(1));
+        currentOctave = octaveNumber;
+        return new Pitch(pitchName,octaveNumber);
+    }
+
+    @Override
+    public Object visitRelativePitch(motifGrammarParser.RelativePitchContext ctx) {
+        String pitchName = ctx.pitchName().getText();
+        String octaveModifier = ctx.octaveModifier().getText();
+        return new Pitch(pitchName,octaveModifier,currentOctave);
+    }
+
+    @Override
+    public Object visitSimplePitch(motifGrammarParser.SimplePitchContext ctx) {
+        String pitchName = ctx.pitchName().getText();
+        return new Pitch(pitchName,currentOctave);
+    }
+
+    // Pitch move
+    //-------------------------------------------------------------------------------------------------------------
+
+
+    @Override
+    public Motif<HarmonicPitch.Move> visitLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx) {
+
+        List<Integer> pitchMoves = new ArrayList<>();
+        for (int i = 0; i < ctx.pitchMove().size(); i++) {
+            pitchMoves.add(i,Integer.valueOf(ctx.pitchMove(i).pitchMoveNumber().getText()));
+        }
         return null;
     }
 }
