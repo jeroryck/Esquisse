@@ -13,7 +13,7 @@ public class LoopMotif<T> extends Motif
 
     @Override
     public void start() {
-        state = -1;
+        state = 1;
         motif.start();
     }
 

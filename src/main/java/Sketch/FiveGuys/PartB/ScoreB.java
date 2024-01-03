@@ -50,16 +50,11 @@ public class ScoreB {
 
         violin1PitchRange = VIOLIN_RANGE;
 
-        // Set-up of the automaton generating the chord tones
-        List<HarmonicPitch.Move> baseMotifChordTonesV1a = FastInput.hp(new int[]{1,1,-1});
-        List<HarmonicPitch.Move> baseMotifChordTonesV1b = FastInput.hp(new int[]{-1,-1,1});
-        OrMotif baseMotifChordTonesV1 = new OrMotif(new Motif[]{
-                new LinearMotif(baseMotifChordTonesV1b),new LinearMotif(baseMotifChordTonesV1a)});
-        List<Duration> baseMotifDurationV1 = FastInput.dur(new int[]{BLANCHE,BLANCHE,BLANCHE,RONDE});
-        LoopMotif<HarmonicPitch.Move> motifChordTonesV1 =
-                new LoopMotif<>(baseMotifChordTonesV1,3000); // arbitrary high (unused)
+        // Set-up of the automatons generating the chord tones
+        String specMotifChordTone = "(LOOP 3000 (OR (m1 m1 m-1) (m-1 m-1 m1)))";
+        Motif motifChordTonesV1 = FastInput.motifFromString(specMotifChordTone);
         LoopMotif<Duration> motifDurationV1 =
-                new LoopMotif<>(FastInput.durationMotifFromString("(2 2 2 1)"),3000);
+                new LoopMotif<>(FastInput.motifFromString("(2 2 2 1)"),3000);
 
         // Generation of the sequence of chordTones
         ListRangedHarmonicPitch violinChordTones = new ListRangedHarmonicPitch();

@@ -18,6 +18,56 @@ public interface motifGrammarListener extends ParseTreeListener {
 	 */
 	void exitMain(motifGrammarParser.MainContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link motifGrammarParser#motif}.
+	 * @param ctx the parse tree
+	 */
+	void enterMotif(motifGrammarParser.MotifContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link motifGrammarParser#motif}.
+	 * @param ctx the parse tree
+	 */
+	void exitMotif(motifGrammarParser.MotifContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link motifGrammarParser#seriesMotif}.
+	 * @param ctx the parse tree
+	 */
+	void enterSeriesMotif(motifGrammarParser.SeriesMotifContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link motifGrammarParser#seriesMotif}.
+	 * @param ctx the parse tree
+	 */
+	void exitSeriesMotif(motifGrammarParser.SeriesMotifContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link motifGrammarParser#orMotif}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrMotif(motifGrammarParser.OrMotifContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link motifGrammarParser#orMotif}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrMotif(motifGrammarParser.OrMotifContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link motifGrammarParser#loopMotif}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoopMotif(motifGrammarParser.LoopMotifContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link motifGrammarParser#loopMotif}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoopMotif(motifGrammarParser.LoopMotifContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link motifGrammarParser#loopNumber}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoopNumber(motifGrammarParser.LoopNumberContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link motifGrammarParser#loopNumber}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoopNumber(motifGrammarParser.LoopNumberContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link motifGrammarParser#linearMotif}.
 	 * @param ctx the parse tree
 	 */
@@ -148,6 +198,16 @@ public interface motifGrammarListener extends ParseTreeListener {
 	 */
 	void exitPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link motifGrammarParser#durationSpec}.
+	 * @param ctx the parse tree
+	 */
+	void enterDurationSpec(motifGrammarParser.DurationSpecContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link motifGrammarParser#durationSpec}.
+	 * @param ctx the parse tree
+	 */
+	void exitDurationSpec(motifGrammarParser.DurationSpecContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link motifGrammarParser#duration}.
 	 * @param ctx the parse tree
 	 */
@@ -177,4 +237,14 @@ public interface motifGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSimpleDuration(motifGrammarParser.SimpleDurationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link motifGrammarParser#mute}.
+	 * @param ctx the parse tree
+	 */
+	void enterMute(motifGrammarParser.MuteContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link motifGrammarParser#mute}.
+	 * @param ctx the parse tree
+	 */
+	void exitMute(motifGrammarParser.MuteContext ctx);
 }

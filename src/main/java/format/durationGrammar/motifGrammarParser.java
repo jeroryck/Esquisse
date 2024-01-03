@@ -25,32 +25,36 @@ public class motifGrammarParser extends Parser {
 		T__38=39, T__39=40, T__40=41, T__41=42, T__42=43, T__43=44, T__44=45, 
 		T__45=46, T__46=47, T__47=48, T__48=49, T__49=50, T__50=51, T__51=52, 
 		T__52=53, T__53=54, T__54=55, T__55=56, T__56=57, T__57=58, T__58=59, 
-		ID=60, WS=61;
+		T__59=60, T__60=61, T__61=62, T__62=63, ID=64, WS=65, INTEGER=66;
 	public static final int
-		RULE_main = 0, RULE_linearMotif = 1, RULE_linearMotifDuration = 2, RULE_linearMotifPitch = 3, 
-		RULE_linearMotifPitchMove = 4, RULE_pitch = 5, RULE_absolutePitch = 6, 
-		RULE_relativePitch = 7, RULE_simplePitch = 8, RULE_pitchName = 9, RULE_octaveNumber = 10, 
-		RULE_octaveModifier = 11, RULE_pitchMove = 12, RULE_pitchMoveNumber = 13, 
-		RULE_duration = 14, RULE_compoundDuration = 15, RULE_simpleDuration = 16;
+		RULE_main = 0, RULE_motif = 1, RULE_seriesMotif = 2, RULE_orMotif = 3, 
+		RULE_loopMotif = 4, RULE_loopNumber = 5, RULE_linearMotif = 6, RULE_linearMotifDuration = 7, 
+		RULE_linearMotifPitch = 8, RULE_linearMotifPitchMove = 9, RULE_pitch = 10, 
+		RULE_absolutePitch = 11, RULE_relativePitch = 12, RULE_simplePitch = 13, 
+		RULE_pitchName = 14, RULE_octaveNumber = 15, RULE_octaveModifier = 16, 
+		RULE_pitchMove = 17, RULE_pitchMoveNumber = 18, RULE_durationSpec = 19, 
+		RULE_duration = 20, RULE_compoundDuration = 21, RULE_simpleDuration = 22, 
+		RULE_mute = 23;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"main", "linearMotif", "linearMotifDuration", "linearMotifPitch", "linearMotifPitchMove", 
+			"main", "motif", "seriesMotif", "orMotif", "loopMotif", "loopNumber", 
+			"linearMotif", "linearMotifDuration", "linearMotifPitch", "linearMotifPitchMove", 
 			"pitch", "absolutePitch", "relativePitch", "simplePitch", "pitchName", 
-			"octaveNumber", "octaveModifier", "pitchMove", "pitchMoveNumber", "duration", 
-			"compoundDuration", "simpleDuration"
+			"octaveNumber", "octaveModifier", "pitchMove", "pitchMoveNumber", "durationSpec", 
+			"duration", "compoundDuration", "simpleDuration", "mute"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'('", "')'", "'.'", "'a'", "'aes'", "'ais'", "'b'", "'bes'", "'bis'", 
-			"'c'", "'ces'", "'cis'", "'d'", "'des'", "'dis'", "'e'", "'ees'", "'eis'", 
-			"'f'", "'fes'", "'fis'", "'g'", "'ges'", "'gis'", "'r'", "'o0'", "'o1'", 
-			"'o2'", "'o3'", "'o4'", "'o5'", "'o6'", "'o7'", "'o+'", "'o++'", "'o-'", 
-			"'o--'", "'m'", "'-7'", "'-6'", "'-5'", "'-4'", "'-3'", "'-2'", "'-1'", 
-			"'0'", "'1'", "'2'", "'3'", "'4'", "'5'", "'6'", "'7'", "'['", "']'", 
-			"'8'", "'16'", "'32'", "'64'"
+			null, "'('", "')'", "'OR'", "'LOOP'", "'0'", "'1'", "'2'", "'3'", "'4'", 
+			"'5'", "'6'", "'7'", "'8'", "'9'", "'.'", "'a'", "'aes'", "'ais'", "'b'", 
+			"'bes'", "'bis'", "'c'", "'ces'", "'cis'", "'d'", "'des'", "'dis'", "'e'", 
+			"'ees'", "'eis'", "'f'", "'fes'", "'fis'", "'g'", "'ges'", "'gis'", "'r'", 
+			"'o0'", "'o1'", "'o2'", "'o3'", "'o4'", "'o5'", "'o6'", "'o7'", "'o+'", 
+			"'o++'", "'o-'", "'o--'", "'m'", "'-7'", "'-6'", "'-5'", "'-4'", "'-3'", 
+			"'-2'", "'-1'", "'['", "']'", "'16'", "'32'", "'64'", "'mute'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -61,7 +65,7 @@ public class motifGrammarParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			"ID", "WS"
+			null, null, null, null, "ID", "WS", "INTEGER"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -117,8 +121,8 @@ public class motifGrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class MainContext extends ParserRuleContext {
-		public LinearMotifContext linearMotif() {
-			return getRuleContext(LinearMotifContext.class,0);
+		public MotifContext motif() {
+			return getRuleContext(MotifContext.class,0);
 		}
 		public TerminalNode EOF() { return getToken(motifGrammarParser.EOF, 0); }
 		public MainContext(ParserRuleContext parent, int invokingState) {
@@ -146,10 +150,331 @@ public class motifGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(34);
-			linearMotif();
-			setState(35);
+			setState(48);
+			motif();
+			setState(49);
 			match(EOF);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class MotifContext extends ParserRuleContext {
+		public LinearMotifContext linearMotif() {
+			return getRuleContext(LinearMotifContext.class,0);
+		}
+		public SeriesMotifContext seriesMotif() {
+			return getRuleContext(SeriesMotifContext.class,0);
+		}
+		public OrMotifContext orMotif() {
+			return getRuleContext(OrMotifContext.class,0);
+		}
+		public LoopMotifContext loopMotif() {
+			return getRuleContext(LoopMotifContext.class,0);
+		}
+		public MotifContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_motif; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterMotif(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitMotif(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitMotif(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final MotifContext motif() throws RecognitionException {
+		MotifContext _localctx = new MotifContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_motif);
+		try {
+			setState(55);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(51);
+				linearMotif();
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(52);
+				seriesMotif();
+				}
+				break;
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(53);
+				orMotif();
+				}
+				break;
+			case 4:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(54);
+				loopMotif();
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class SeriesMotifContext extends ParserRuleContext {
+		public List<MotifContext> motif() {
+			return getRuleContexts(MotifContext.class);
+		}
+		public MotifContext motif(int i) {
+			return getRuleContext(MotifContext.class,i);
+		}
+		public SeriesMotifContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_seriesMotif; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterSeriesMotif(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitSeriesMotif(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitSeriesMotif(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final SeriesMotifContext seriesMotif() throws RecognitionException {
+		SeriesMotifContext _localctx = new SeriesMotifContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_seriesMotif);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(57);
+			match(T__0);
+			setState(59); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(58);
+				motif();
+				}
+				}
+				setState(61); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==T__0 );
+			setState(63);
+			match(T__1);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class OrMotifContext extends ParserRuleContext {
+		public List<MotifContext> motif() {
+			return getRuleContexts(MotifContext.class);
+		}
+		public MotifContext motif(int i) {
+			return getRuleContext(MotifContext.class,i);
+		}
+		public OrMotifContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_orMotif; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterOrMotif(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitOrMotif(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitOrMotif(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final OrMotifContext orMotif() throws RecognitionException {
+		OrMotifContext _localctx = new OrMotifContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_orMotif);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(65);
+			match(T__0);
+			setState(66);
+			match(T__2);
+			setState(68); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(67);
+				motif();
+				}
+				}
+				setState(70); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==T__0 );
+			setState(72);
+			match(T__1);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class LoopMotifContext extends ParserRuleContext {
+		public LoopNumberContext loopNumber() {
+			return getRuleContext(LoopNumberContext.class,0);
+		}
+		public MotifContext motif() {
+			return getRuleContext(MotifContext.class,0);
+		}
+		public LoopMotifContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_loopMotif; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterLoopMotif(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitLoopMotif(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitLoopMotif(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final LoopMotifContext loopMotif() throws RecognitionException {
+		LoopMotifContext _localctx = new LoopMotifContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_loopMotif);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(74);
+			match(T__0);
+			setState(75);
+			match(T__3);
+			setState(76);
+			loopNumber();
+			setState(77);
+			motif();
+			setState(78);
+			match(T__1);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class LoopNumberContext extends ParserRuleContext {
+		public TerminalNode INTEGER() { return getToken(motifGrammarParser.INTEGER, 0); }
+		public LoopNumberContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_loopNumber; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterLoopNumber(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitLoopNumber(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitLoopNumber(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final LoopNumberContext loopNumber() throws RecognitionException {
+		LoopNumberContext _localctx = new LoopNumberContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_loopNumber);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(80);
+			_la = _input.LA(1);
+			if ( !(((((_la - 5)) & ~0x3f) == 0 && ((1L << (_la - 5)) & 2305843009213694975L) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -195,29 +520,29 @@ public class motifGrammarParser extends Parser {
 
 	public final LinearMotifContext linearMotif() throws RecognitionException {
 		LinearMotifContext _localctx = new LinearMotifContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_linearMotif);
+		enterRule(_localctx, 12, RULE_linearMotif);
 		try {
-			setState(40);
+			setState(85);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(37);
+				setState(82);
 				linearMotifDuration();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(38);
+				setState(83);
 				linearMotifPitch();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(39);
+				setState(84);
 				linearMotifPitchMove();
 				}
 				break;
@@ -236,11 +561,11 @@ public class motifGrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class LinearMotifDurationContext extends ParserRuleContext {
-		public List<DurationContext> duration() {
-			return getRuleContexts(DurationContext.class);
+		public List<DurationSpecContext> durationSpec() {
+			return getRuleContexts(DurationSpecContext.class);
 		}
-		public DurationContext duration(int i) {
-			return getRuleContext(DurationContext.class,i);
+		public DurationSpecContext durationSpec(int i) {
+			return getRuleContext(DurationSpecContext.class,i);
 		}
 		public LinearMotifDurationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -263,28 +588,28 @@ public class motifGrammarParser extends Parser {
 
 	public final LinearMotifDurationContext linearMotifDuration() throws RecognitionException {
 		LinearMotifDurationContext _localctx = new LinearMotifDurationContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_linearMotifDuration);
+		enterRule(_localctx, 14, RULE_linearMotifDuration);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(42);
+			setState(87);
 			match(T__0);
-			setState(44); 
+			setState(89); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(43);
-				duration();
+				setState(88);
+				durationSpec();
 				}
 				}
-				setState(46); 
+				setState(91); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 1100426421450309632L) != 0) );
-			setState(48);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 8358680908399649472L) != 0) );
+			setState(93);
 			match(T__1);
 			}
 		}
@@ -328,28 +653,28 @@ public class motifGrammarParser extends Parser {
 
 	public final LinearMotifPitchContext linearMotifPitch() throws RecognitionException {
 		LinearMotifPitchContext _localctx = new LinearMotifPitchContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_linearMotifPitch);
+		enterRule(_localctx, 16, RULE_linearMotifPitch);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(50);
+			setState(95);
 			match(T__0);
-			setState(52); 
+			setState(97); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(51);
+				setState(96);
 				pitch();
 				}
 				}
-				setState(54); 
+				setState(99); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 67108848L) != 0) );
-			setState(56);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 274877841408L) != 0) );
+			setState(101);
 			match(T__1);
 			}
 		}
@@ -393,28 +718,28 @@ public class motifGrammarParser extends Parser {
 
 	public final LinearMotifPitchMoveContext linearMotifPitchMove() throws RecognitionException {
 		LinearMotifPitchMoveContext _localctx = new LinearMotifPitchMoveContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_linearMotifPitchMove);
+		enterRule(_localctx, 18, RULE_linearMotifPitchMove);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(103);
 			match(T__0);
-			setState(60); 
+			setState(105); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(59);
+				setState(104);
 				pitchMove();
 				}
 				}
-				setState(62); 
+				setState(107); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==T__37 );
-			setState(64);
+			} while ( _la==T__49 );
+			setState(109);
 			match(T__1);
 			}
 		}
@@ -461,29 +786,29 @@ public class motifGrammarParser extends Parser {
 
 	public final PitchContext pitch() throws RecognitionException {
 		PitchContext _localctx = new PitchContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_pitch);
+		enterRule(_localctx, 20, RULE_pitch);
 		try {
-			setState(69);
+			setState(114);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(66);
+				setState(111);
 				absolutePitch();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(67);
+				setState(112);
 				relativePitch();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(68);
+				setState(113);
 				simplePitch();
 				}
 				break;
@@ -529,15 +854,15 @@ public class motifGrammarParser extends Parser {
 
 	public final AbsolutePitchContext absolutePitch() throws RecognitionException {
 		AbsolutePitchContext _localctx = new AbsolutePitchContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_absolutePitch);
+		enterRule(_localctx, 22, RULE_absolutePitch);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
+			setState(116);
 			pitchName();
-			setState(72);
-			match(T__2);
-			setState(73);
+			setState(117);
+			match(T__14);
+			setState(118);
 			octaveNumber();
 			}
 		}
@@ -581,15 +906,15 @@ public class motifGrammarParser extends Parser {
 
 	public final RelativePitchContext relativePitch() throws RecognitionException {
 		RelativePitchContext _localctx = new RelativePitchContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_relativePitch);
+		enterRule(_localctx, 24, RULE_relativePitch);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(75);
+			setState(120);
 			pitchName();
-			setState(76);
-			match(T__2);
-			setState(77);
+			setState(121);
+			match(T__14);
+			setState(122);
 			octaveModifier();
 			}
 		}
@@ -630,11 +955,11 @@ public class motifGrammarParser extends Parser {
 
 	public final SimplePitchContext simplePitch() throws RecognitionException {
 		SimplePitchContext _localctx = new SimplePitchContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_simplePitch);
+		enterRule(_localctx, 26, RULE_simplePitch);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(79);
+			setState(124);
 			pitchName();
 			}
 		}
@@ -672,14 +997,14 @@ public class motifGrammarParser extends Parser {
 
 	public final PitchNameContext pitchName() throws RecognitionException {
 		PitchNameContext _localctx = new PitchNameContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_pitchName);
+		enterRule(_localctx, 28, RULE_pitchName);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(81);
+			setState(126);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 67108848L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 274877841408L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -723,14 +1048,14 @@ public class motifGrammarParser extends Parser {
 
 	public final OctaveNumberContext octaveNumber() throws RecognitionException {
 		OctaveNumberContext _localctx = new OctaveNumberContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_octaveNumber);
+		enterRule(_localctx, 30, RULE_octaveNumber);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(83);
+			setState(128);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 17112760320L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 70093866270720L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -774,14 +1099,14 @@ public class motifGrammarParser extends Parser {
 
 	public final OctaveModifierContext octaveModifier() throws RecognitionException {
 		OctaveModifierContext _localctx = new OctaveModifierContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_octaveModifier);
+		enterRule(_localctx, 32, RULE_octaveModifier);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(130);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 257698037760L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1055531162664960L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -828,13 +1153,13 @@ public class motifGrammarParser extends Parser {
 
 	public final PitchMoveContext pitchMove() throws RecognitionException {
 		PitchMoveContext _localctx = new PitchMoveContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_pitchMove);
+		enterRule(_localctx, 34, RULE_pitchMove);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(87);
-			match(T__37);
-			setState(88);
+			setState(132);
+			match(T__49);
+			setState(133);
 			pitchMoveNumber();
 			}
 		}
@@ -872,14 +1197,14 @@ public class motifGrammarParser extends Parser {
 
 	public final PitchMoveNumberContext pitchMoveNumber() throws RecognitionException {
 		PitchMoveNumberContext _localctx = new PitchMoveNumberContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_pitchMoveNumber);
+		enterRule(_localctx, 36, RULE_pitchMoveNumber);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(90);
+			setState(135);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 18013848753668096L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 285978576338034656L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -887,6 +1212,65 @@ public class motifGrammarParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class DurationSpecContext extends ParserRuleContext {
+		public DurationContext duration() {
+			return getRuleContext(DurationContext.class,0);
+		}
+		public MuteContext mute() {
+			return getRuleContext(MuteContext.class,0);
+		}
+		public DurationSpecContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_durationSpec; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterDurationSpec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitDurationSpec(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitDurationSpec(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final DurationSpecContext durationSpec() throws RecognitionException {
+		DurationSpecContext _localctx = new DurationSpecContext(_ctx, getState());
+		enterRule(_localctx, 38, RULE_durationSpec);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(137);
+			duration();
+			setState(139);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==T__62) {
+				{
+				setState(138);
+				mute();
+				}
+			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -929,28 +1313,28 @@ public class motifGrammarParser extends Parser {
 
 	public final DurationContext duration() throws RecognitionException {
 		DurationContext _localctx = new DurationContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_duration);
+		enterRule(_localctx, 40, RULE_duration);
 		try {
-			setState(94);
+			setState(143);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case T__46:
-			case T__47:
-			case T__49:
-			case T__55:
-			case T__56:
-			case T__57:
-			case T__58:
+			case T__5:
+			case T__6:
+			case T__8:
+			case T__12:
+			case T__59:
+			case T__60:
+			case T__61:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(92);
+				setState(141);
 				simpleDuration();
 				}
 				break;
-			case T__53:
+			case T__57:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(93);
+				setState(142);
 				compoundDuration();
 				}
 				break;
@@ -998,29 +1382,29 @@ public class motifGrammarParser extends Parser {
 
 	public final CompoundDurationContext compoundDuration() throws RecognitionException {
 		CompoundDurationContext _localctx = new CompoundDurationContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_compoundDuration);
+		enterRule(_localctx, 42, RULE_compoundDuration);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(96);
-			match(T__53);
-			setState(98); 
+			setState(145);
+			match(T__57);
+			setState(147); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(97);
+				setState(146);
 				simpleDuration();
 				}
 				}
-				setState(100); 
+				setState(149); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 1082412022940827648L) != 0) );
-			setState(102);
-			match(T__54);
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 8070450532247937728L) != 0) );
+			setState(151);
+			match(T__58);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1057,14 +1441,14 @@ public class motifGrammarParser extends Parser {
 
 	public final SimpleDurationContext simpleDuration() throws RecognitionException {
 		SimpleDurationContext _localctx = new SimpleDurationContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_simpleDuration);
+		enterRule(_localctx, 44, RULE_simpleDuration);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
+			setState(153);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1082412022940827648L) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 8070450532247937728L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -1085,64 +1469,136 @@ public class motifGrammarParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
+	public static class MuteContext extends ParserRuleContext {
+		public MuteContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_mute; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterMute(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitMute(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitMute(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final MuteContext mute() throws RecognitionException {
+		MuteContext _localctx = new MuteContext(_ctx, getState());
+		enterRule(_localctx, 46, RULE_mute);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(155);
+			match(T__62);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static final String _serializedATN =
-		"\u0004\u0001=k\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002\u0002"+
-		"\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002\u0005"+
-		"\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002\b\u0007"+
-		"\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002\f\u0007"+
-		"\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f\u0002"+
-		"\u0010\u0007\u0010\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0001\u0001"+
-		"\u0001\u0001\u0001\u0003\u0001)\b\u0001\u0001\u0002\u0001\u0002\u0004"+
-		"\u0002-\b\u0002\u000b\u0002\f\u0002.\u0001\u0002\u0001\u0002\u0001\u0003"+
-		"\u0001\u0003\u0004\u00035\b\u0003\u000b\u0003\f\u00036\u0001\u0003\u0001"+
-		"\u0003\u0001\u0004\u0001\u0004\u0004\u0004=\b\u0004\u000b\u0004\f\u0004"+
-		">\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005"+
-		"F\b\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0007"+
-		"\u0001\u0007\u0001\u0007\u0001\u0007\u0001\b\u0001\b\u0001\t\u0001\t\u0001"+
-		"\n\u0001\n\u0001\u000b\u0001\u000b\u0001\f\u0001\f\u0001\f\u0001\r\u0001"+
-		"\r\u0001\u000e\u0001\u000e\u0003\u000e_\b\u000e\u0001\u000f\u0001\u000f"+
-		"\u0004\u000fc\b\u000f\u000b\u000f\f\u000fd\u0001\u000f\u0001\u000f\u0001"+
-		"\u0010\u0001\u0010\u0001\u0010\u0000\u0000\u0011\u0000\u0002\u0004\u0006"+
-		"\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \u0000\u0005"+
-		"\u0001\u0000\u0004\u0019\u0001\u0000\u001a!\u0001\u0000\"%\u0001\u0000"+
-		"\'5\u0003\u0000/0228;b\u0000\"\u0001\u0000\u0000\u0000\u0002(\u0001\u0000"+
-		"\u0000\u0000\u0004*\u0001\u0000\u0000\u0000\u00062\u0001\u0000\u0000\u0000"+
-		"\b:\u0001\u0000\u0000\u0000\nE\u0001\u0000\u0000\u0000\fG\u0001\u0000"+
-		"\u0000\u0000\u000eK\u0001\u0000\u0000\u0000\u0010O\u0001\u0000\u0000\u0000"+
-		"\u0012Q\u0001\u0000\u0000\u0000\u0014S\u0001\u0000\u0000\u0000\u0016U"+
-		"\u0001\u0000\u0000\u0000\u0018W\u0001\u0000\u0000\u0000\u001aZ\u0001\u0000"+
-		"\u0000\u0000\u001c^\u0001\u0000\u0000\u0000\u001e`\u0001\u0000\u0000\u0000"+
-		" h\u0001\u0000\u0000\u0000\"#\u0003\u0002\u0001\u0000#$\u0005\u0000\u0000"+
-		"\u0001$\u0001\u0001\u0000\u0000\u0000%)\u0003\u0004\u0002\u0000&)\u0003"+
-		"\u0006\u0003\u0000\')\u0003\b\u0004\u0000(%\u0001\u0000\u0000\u0000(&"+
-		"\u0001\u0000\u0000\u0000(\'\u0001\u0000\u0000\u0000)\u0003\u0001\u0000"+
-		"\u0000\u0000*,\u0005\u0001\u0000\u0000+-\u0003\u001c\u000e\u0000,+\u0001"+
-		"\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000.,\u0001\u0000\u0000\u0000"+
-		"./\u0001\u0000\u0000\u0000/0\u0001\u0000\u0000\u000001\u0005\u0002\u0000"+
-		"\u00001\u0005\u0001\u0000\u0000\u000024\u0005\u0001\u0000\u000035\u0003"+
-		"\n\u0005\u000043\u0001\u0000\u0000\u000056\u0001\u0000\u0000\u000064\u0001"+
-		"\u0000\u0000\u000067\u0001\u0000\u0000\u000078\u0001\u0000\u0000\u0000"+
-		"89\u0005\u0002\u0000\u00009\u0007\u0001\u0000\u0000\u0000:<\u0005\u0001"+
-		"\u0000\u0000;=\u0003\u0018\f\u0000<;\u0001\u0000\u0000\u0000=>\u0001\u0000"+
-		"\u0000\u0000><\u0001\u0000\u0000\u0000>?\u0001\u0000\u0000\u0000?@\u0001"+
-		"\u0000\u0000\u0000@A\u0005\u0002\u0000\u0000A\t\u0001\u0000\u0000\u0000"+
-		"BF\u0003\f\u0006\u0000CF\u0003\u000e\u0007\u0000DF\u0003\u0010\b\u0000"+
-		"EB\u0001\u0000\u0000\u0000EC\u0001\u0000\u0000\u0000ED\u0001\u0000\u0000"+
-		"\u0000F\u000b\u0001\u0000\u0000\u0000GH\u0003\u0012\t\u0000HI\u0005\u0003"+
-		"\u0000\u0000IJ\u0003\u0014\n\u0000J\r\u0001\u0000\u0000\u0000KL\u0003"+
-		"\u0012\t\u0000LM\u0005\u0003\u0000\u0000MN\u0003\u0016\u000b\u0000N\u000f"+
-		"\u0001\u0000\u0000\u0000OP\u0003\u0012\t\u0000P\u0011\u0001\u0000\u0000"+
-		"\u0000QR\u0007\u0000\u0000\u0000R\u0013\u0001\u0000\u0000\u0000ST\u0007"+
-		"\u0001\u0000\u0000T\u0015\u0001\u0000\u0000\u0000UV\u0007\u0002\u0000"+
-		"\u0000V\u0017\u0001\u0000\u0000\u0000WX\u0005&\u0000\u0000XY\u0003\u001a"+
-		"\r\u0000Y\u0019\u0001\u0000\u0000\u0000Z[\u0007\u0003\u0000\u0000[\u001b"+
-		"\u0001\u0000\u0000\u0000\\_\u0003 \u0010\u0000]_\u0003\u001e\u000f\u0000"+
-		"^\\\u0001\u0000\u0000\u0000^]\u0001\u0000\u0000\u0000_\u001d\u0001\u0000"+
-		"\u0000\u0000`b\u00056\u0000\u0000ac\u0003 \u0010\u0000ba\u0001\u0000\u0000"+
-		"\u0000cd\u0001\u0000\u0000\u0000db\u0001\u0000\u0000\u0000de\u0001\u0000"+
-		"\u0000\u0000ef\u0001\u0000\u0000\u0000fg\u00057\u0000\u0000g\u001f\u0001"+
-		"\u0000\u0000\u0000hi\u0007\u0004\u0000\u0000i!\u0001\u0000\u0000\u0000"+
-		"\u0007(.6>E^d";
+		"\u0004\u0001B\u009e\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
+		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
+		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
+		"\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f"+
+		"\u0002\u0010\u0007\u0010\u0002\u0011\u0007\u0011\u0002\u0012\u0007\u0012"+
+		"\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0002\u0015\u0007\u0015"+
+		"\u0002\u0016\u0007\u0016\u0002\u0017\u0007\u0017\u0001\u0000\u0001\u0000"+
+		"\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0001\u0003\u0001"+
+		"8\b\u0001\u0001\u0002\u0001\u0002\u0004\u0002<\b\u0002\u000b\u0002\f\u0002"+
+		"=\u0001\u0002\u0001\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0004\u0003"+
+		"E\b\u0003\u000b\u0003\f\u0003F\u0001\u0003\u0001\u0003\u0001\u0004\u0001"+
+		"\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001"+
+		"\u0005\u0001\u0006\u0001\u0006\u0001\u0006\u0003\u0006V\b\u0006\u0001"+
+		"\u0007\u0001\u0007\u0004\u0007Z\b\u0007\u000b\u0007\f\u0007[\u0001\u0007"+
+		"\u0001\u0007\u0001\b\u0001\b\u0004\bb\b\b\u000b\b\f\bc\u0001\b\u0001\b"+
+		"\u0001\t\u0001\t\u0004\tj\b\t\u000b\t\f\tk\u0001\t\u0001\t\u0001\n\u0001"+
+		"\n\u0001\n\u0003\ns\b\n\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b"+
+		"\u0001\f\u0001\f\u0001\f\u0001\f\u0001\r\u0001\r\u0001\u000e\u0001\u000e"+
+		"\u0001\u000f\u0001\u000f\u0001\u0010\u0001\u0010\u0001\u0011\u0001\u0011"+
+		"\u0001\u0011\u0001\u0012\u0001\u0012\u0001\u0013\u0001\u0013\u0003\u0013"+
+		"\u008c\b\u0013\u0001\u0014\u0001\u0014\u0003\u0014\u0090\b\u0014\u0001"+
+		"\u0015\u0001\u0015\u0004\u0015\u0094\b\u0015\u000b\u0015\f\u0015\u0095"+
+		"\u0001\u0015\u0001\u0015\u0001\u0016\u0001\u0016\u0001\u0017\u0001\u0017"+
+		"\u0001\u0017\u0000\u0000\u0018\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010"+
+		"\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,.\u0000\u0006\u0002"+
+		"\u0000\u0005\u000eBB\u0001\u0000\u0010%\u0001\u0000&-\u0001\u0000.1\u0002"+
+		"\u0000\u0005\f39\u0004\u0000\u0006\u0007\t\t\r\r<>\u0094\u00000\u0001"+
+		"\u0000\u0000\u0000\u00027\u0001\u0000\u0000\u0000\u00049\u0001\u0000\u0000"+
+		"\u0000\u0006A\u0001\u0000\u0000\u0000\bJ\u0001\u0000\u0000\u0000\nP\u0001"+
+		"\u0000\u0000\u0000\fU\u0001\u0000\u0000\u0000\u000eW\u0001\u0000\u0000"+
+		"\u0000\u0010_\u0001\u0000\u0000\u0000\u0012g\u0001\u0000\u0000\u0000\u0014"+
+		"r\u0001\u0000\u0000\u0000\u0016t\u0001\u0000\u0000\u0000\u0018x\u0001"+
+		"\u0000\u0000\u0000\u001a|\u0001\u0000\u0000\u0000\u001c~\u0001\u0000\u0000"+
+		"\u0000\u001e\u0080\u0001\u0000\u0000\u0000 \u0082\u0001\u0000\u0000\u0000"+
+		"\"\u0084\u0001\u0000\u0000\u0000$\u0087\u0001\u0000\u0000\u0000&\u0089"+
+		"\u0001\u0000\u0000\u0000(\u008f\u0001\u0000\u0000\u0000*\u0091\u0001\u0000"+
+		"\u0000\u0000,\u0099\u0001\u0000\u0000\u0000.\u009b\u0001\u0000\u0000\u0000"+
+		"01\u0003\u0002\u0001\u000012\u0005\u0000\u0000\u00012\u0001\u0001\u0000"+
+		"\u0000\u000038\u0003\f\u0006\u000048\u0003\u0004\u0002\u000058\u0003\u0006"+
+		"\u0003\u000068\u0003\b\u0004\u000073\u0001\u0000\u0000\u000074\u0001\u0000"+
+		"\u0000\u000075\u0001\u0000\u0000\u000076\u0001\u0000\u0000\u00008\u0003"+
+		"\u0001\u0000\u0000\u00009;\u0005\u0001\u0000\u0000:<\u0003\u0002\u0001"+
+		"\u0000;:\u0001\u0000\u0000\u0000<=\u0001\u0000\u0000\u0000=;\u0001\u0000"+
+		"\u0000\u0000=>\u0001\u0000\u0000\u0000>?\u0001\u0000\u0000\u0000?@\u0005"+
+		"\u0002\u0000\u0000@\u0005\u0001\u0000\u0000\u0000AB\u0005\u0001\u0000"+
+		"\u0000BD\u0005\u0003\u0000\u0000CE\u0003\u0002\u0001\u0000DC\u0001\u0000"+
+		"\u0000\u0000EF\u0001\u0000\u0000\u0000FD\u0001\u0000\u0000\u0000FG\u0001"+
+		"\u0000\u0000\u0000GH\u0001\u0000\u0000\u0000HI\u0005\u0002\u0000\u0000"+
+		"I\u0007\u0001\u0000\u0000\u0000JK\u0005\u0001\u0000\u0000KL\u0005\u0004"+
+		"\u0000\u0000LM\u0003\n\u0005\u0000MN\u0003\u0002\u0001\u0000NO\u0005\u0002"+
+		"\u0000\u0000O\t\u0001\u0000\u0000\u0000PQ\u0007\u0000\u0000\u0000Q\u000b"+
+		"\u0001\u0000\u0000\u0000RV\u0003\u000e\u0007\u0000SV\u0003\u0010\b\u0000"+
+		"TV\u0003\u0012\t\u0000UR\u0001\u0000\u0000\u0000US\u0001\u0000\u0000\u0000"+
+		"UT\u0001\u0000\u0000\u0000V\r\u0001\u0000\u0000\u0000WY\u0005\u0001\u0000"+
+		"\u0000XZ\u0003&\u0013\u0000YX\u0001\u0000\u0000\u0000Z[\u0001\u0000\u0000"+
+		"\u0000[Y\u0001\u0000\u0000\u0000[\\\u0001\u0000\u0000\u0000\\]\u0001\u0000"+
+		"\u0000\u0000]^\u0005\u0002\u0000\u0000^\u000f\u0001\u0000\u0000\u0000"+
+		"_a\u0005\u0001\u0000\u0000`b\u0003\u0014\n\u0000a`\u0001\u0000\u0000\u0000"+
+		"bc\u0001\u0000\u0000\u0000ca\u0001\u0000\u0000\u0000cd\u0001\u0000\u0000"+
+		"\u0000de\u0001\u0000\u0000\u0000ef\u0005\u0002\u0000\u0000f\u0011\u0001"+
+		"\u0000\u0000\u0000gi\u0005\u0001\u0000\u0000hj\u0003\"\u0011\u0000ih\u0001"+
+		"\u0000\u0000\u0000jk\u0001\u0000\u0000\u0000ki\u0001\u0000\u0000\u0000"+
+		"kl\u0001\u0000\u0000\u0000lm\u0001\u0000\u0000\u0000mn\u0005\u0002\u0000"+
+		"\u0000n\u0013\u0001\u0000\u0000\u0000os\u0003\u0016\u000b\u0000ps\u0003"+
+		"\u0018\f\u0000qs\u0003\u001a\r\u0000ro\u0001\u0000\u0000\u0000rp\u0001"+
+		"\u0000\u0000\u0000rq\u0001\u0000\u0000\u0000s\u0015\u0001\u0000\u0000"+
+		"\u0000tu\u0003\u001c\u000e\u0000uv\u0005\u000f\u0000\u0000vw\u0003\u001e"+
+		"\u000f\u0000w\u0017\u0001\u0000\u0000\u0000xy\u0003\u001c\u000e\u0000"+
+		"yz\u0005\u000f\u0000\u0000z{\u0003 \u0010\u0000{\u0019\u0001\u0000\u0000"+
+		"\u0000|}\u0003\u001c\u000e\u0000}\u001b\u0001\u0000\u0000\u0000~\u007f"+
+		"\u0007\u0001\u0000\u0000\u007f\u001d\u0001\u0000\u0000\u0000\u0080\u0081"+
+		"\u0007\u0002\u0000\u0000\u0081\u001f\u0001\u0000\u0000\u0000\u0082\u0083"+
+		"\u0007\u0003\u0000\u0000\u0083!\u0001\u0000\u0000\u0000\u0084\u0085\u0005"+
+		"2\u0000\u0000\u0085\u0086\u0003$\u0012\u0000\u0086#\u0001\u0000\u0000"+
+		"\u0000\u0087\u0088\u0007\u0004\u0000\u0000\u0088%\u0001\u0000\u0000\u0000"+
+		"\u0089\u008b\u0003(\u0014\u0000\u008a\u008c\u0003.\u0017\u0000\u008b\u008a"+
+		"\u0001\u0000\u0000\u0000\u008b\u008c\u0001\u0000\u0000\u0000\u008c\'\u0001"+
+		"\u0000\u0000\u0000\u008d\u0090\u0003,\u0016\u0000\u008e\u0090\u0003*\u0015"+
+		"\u0000\u008f\u008d\u0001\u0000\u0000\u0000\u008f\u008e\u0001\u0000\u0000"+
+		"\u0000\u0090)\u0001\u0000\u0000\u0000\u0091\u0093\u0005:\u0000\u0000\u0092"+
+		"\u0094\u0003,\u0016\u0000\u0093\u0092\u0001\u0000\u0000\u0000\u0094\u0095"+
+		"\u0001\u0000\u0000\u0000\u0095\u0093\u0001\u0000\u0000\u0000\u0095\u0096"+
+		"\u0001\u0000\u0000\u0000\u0096\u0097\u0001\u0000\u0000\u0000\u0097\u0098"+
+		"\u0005;\u0000\u0000\u0098+\u0001\u0000\u0000\u0000\u0099\u009a\u0007\u0005"+
+		"\u0000\u0000\u009a-\u0001\u0000\u0000\u0000\u009b\u009c\u0005?\u0000\u0000"+
+		"\u009c/\u0001\u0000\u0000\u0000\u000b7=FU[ckr\u008b\u008f\u0095";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

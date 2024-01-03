@@ -2,7 +2,7 @@ package Utils.Motifs;
 
 import java.util.List;
 
-public class SeriesMotif<T> {
+public class SeriesMotif<T> extends Motif {
 
     // this motif activates successively an array of given motifs
 
@@ -12,13 +12,12 @@ public class SeriesMotif<T> {
 
     private int indexCurrentMotif;
 
-    public void start(){ indexCurrentMotif =0; currentMotif = motifs.get(0);}
+    public void start(){ indexCurrentMotif =0; currentMotif = motifs.get(0); currentMotif.start();}
 
     public boolean hasNext(){
         return ((indexCurrentMotif < motifs.size()-1) || currentMotif.hasNext());
     }
 
-    public T currentValue;
 
     public void next(){
         if (!hasNext()) throw new RuntimeException("Linear Motif hasn't next");
@@ -30,5 +29,11 @@ public class SeriesMotif<T> {
             currentValue = currentMotif.currentValue;
         }
 
+    }
+
+    //--------------------------------------------------------------------------------------------------------------
+
+    public SeriesMotif (List motifs){
+        this.motifs = motifs;
     }
 }

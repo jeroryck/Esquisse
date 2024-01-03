@@ -3,14 +3,15 @@ package format.durationGrammar;
 import Concepts.Duration;
 import Concepts.HarmonicPitch;
 import Concepts.Pitch;
-import Utils.Motifs.LinearMotif;
-import Utils.Motifs.Motif;
+import Utils.Motifs.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class motifBuilder extends motifGrammarBaseVisitor {
+
 
     //-------------------------------------------------------------------------------------------------------------
     // Visit start
@@ -21,7 +22,20 @@ public class motifBuilder extends motifGrammarBaseVisitor {
     public Motif visitMain(motifGrammarParser.MainContext ctx) {
         System.out.println("visiting main");
 
-        return  (Motif) visit(ctx.linearMotif());
+        return  (Motif) visit(ctx.motif());
+    }
+
+
+    //---------------------------------------------------------------------------------------------------------------
+    //
+    // Durations
+
+
+    @Override
+    public Duration visitDurationSpec(motifGrammarParser.DurationSpecContext ctx) {
+        Duration duration = (Duration) visit(ctx.duration());
+
+        return duration;
     }
 
     @Override
@@ -29,32 +43,16 @@ public class motifBuilder extends motifGrammarBaseVisitor {
 
         // Reading of the durations of the linear motif
         List<Duration> lDur = new ArrayList<>();
-        for (int i = 0; i < lmc.duration().size(); i++) {
+        for (int i = 0; i < lmc.durationSpec().size(); i++) {
             // Visiting according to the proper case of the rule defining duration
-            lDur.add(i,(Duration) visit(lmc.duration(i)));
+            Duration duration = (Duration) visit(lmc.durationSpec(i));
+            lDur.add(i,duration);
         }
 
         LinearMotif<Duration> linearMotif = new LinearMotif<>(lDur);
 
         return linearMotif;
     }
-
-    @Override
-    public Motif<Pitch> visitLinearMotifPitch(motifGrammarParser.LinearMotifPitchContext ctx) {
-
-        List<Pitch> lPitch = new ArrayList<>();
-        for (int i = 0; i < ctx.pitch().size(); i++) {
-            lPitch.add(i, (Pitch) visitPitch(ctx.pitch(i)));
-        }
-
-        LinearMotif<Pitch> linearMotif = new LinearMotif<>(lPitch);
-        return linearMotif;
-    }
-
-    //---------------------------------------------------------------------------------------------------------------
-    //
-    // Durations
-
     public Duration visitSimpleDuration(motifGrammarParser.SimpleDurationContext sdc){
         return new Duration(sdc.getText());
     }
@@ -74,6 +72,18 @@ public class motifBuilder extends motifGrammarBaseVisitor {
     //--------------------------------------------------------------------------------------------------------------
     //
     // Pitchs
+
+    @Override
+    public Motif<Pitch> visitLinearMotifPitch(motifGrammarParser.LinearMotifPitchContext ctx) {
+
+        List<Pitch> lPitch = new ArrayList<>();
+        for (int i = 0; i < ctx.pitch().size(); i++) {
+            lPitch.add(i, (Pitch) visitPitch(ctx.pitch(i)));
+        }
+
+        LinearMotif<Pitch> linearMotif = new LinearMotif<>(lPitch);
+        return linearMotif;
+    }
 
     // used for the simple pitch (no octave specification). This value could be set by previous pitch specification
     // with octave specification or modirier.
@@ -107,10 +117,47 @@ public class motifBuilder extends motifGrammarBaseVisitor {
     @Override
     public Motif<HarmonicPitch.Move> visitLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx) {
 
-        List<Integer> pitchMoves = new ArrayList<>();
+        List<HarmonicPitch.Move> pitchMoves = new ArrayList<>();
         for (int i = 0; i < ctx.pitchMove().size(); i++) {
-            pitchMoves.add(i,Integer.valueOf(ctx.pitchMove(i).pitchMoveNumber().getText()));
+            int intMove = Integer.valueOf(ctx.pitchMove(i).pitchMoveNumber().getText());
+            pitchMoves.add(i,new HarmonicPitch.Move(intMove));
         }
-        return null;
+
+        return new LinearMotif<HarmonicPitch.Move>(pitchMoves);
+    }
+
+    // Compound motifs
+    //----------------------------------------------------------------------------------------------------------------
+
+
+    @Override
+    public SeriesMotif visitSeriesMotif(motifGrammarParser.SeriesMotifContext ctx) {
+
+        List<Motif>motifs = new ArrayList<>();
+        for (int i = 0; i < ctx.motif().size(); i++) {
+            motifs.add(i,(Motif) visit(ctx.motif(i)));
+        }
+
+        return new SeriesMotif(motifs);
+    }
+
+    @Override
+    public OrMotif visitOrMotif(motifGrammarParser.OrMotifContext ctx) {
+
+        List<Motif>motifs = new ArrayList<>();
+        for (int i = 0; i < ctx.motif().size(); i++) {
+            motifs.add(i,(Motif) visit(ctx.motif(i)));
+        }
+
+        return new OrMotif<>(motifs.toArray(new Motif[motifs.size()]));
+    }
+
+    @Override
+    public LoopMotif visitLoopMotif(motifGrammarParser.LoopMotifContext ctx) {
+
+        String loops = ctx.loopNumber().getText();
+        Motif motif = (Motif) visit(ctx.motif());
+
+        return new LoopMotif<>(motif,Integer.valueOf(loops) );
     }
 }

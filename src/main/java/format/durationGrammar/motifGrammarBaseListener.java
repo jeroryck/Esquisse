@@ -29,6 +29,66 @@ public class motifGrammarBaseListener implements motifGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMotif(motifGrammarParser.MotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMotif(motifGrammarParser.MotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSeriesMotif(motifGrammarParser.SeriesMotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSeriesMotif(motifGrammarParser.SeriesMotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOrMotif(motifGrammarParser.OrMotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOrMotif(motifGrammarParser.OrMotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoopMotif(motifGrammarParser.LoopMotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoopMotif(motifGrammarParser.LoopMotifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoopNumber(motifGrammarParser.LoopNumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoopNumber(motifGrammarParser.LoopNumberContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLinearMotif(motifGrammarParser.LinearMotifContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -185,6 +245,18 @@ public class motifGrammarBaseListener implements motifGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDurationSpec(motifGrammarParser.DurationSpecContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDurationSpec(motifGrammarParser.DurationSpecContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDuration(motifGrammarParser.DurationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -216,6 +288,18 @@ public class motifGrammarBaseListener implements motifGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSimpleDuration(motifGrammarParser.SimpleDurationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMute(motifGrammarParser.MuteContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMute(motifGrammarParser.MuteContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

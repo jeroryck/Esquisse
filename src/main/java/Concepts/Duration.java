@@ -24,6 +24,9 @@ package Concepts;
          return intValue;
      }
 
+     // Nb : when a pitch is associated with a mute duration (mute = true) the pitch itself becomes a silent value.
+     public boolean mute = false;
+
      // La plus petite duree est une quintuple croche (numValue = 1)
      static int MIN_DURATION = 1 ;
 

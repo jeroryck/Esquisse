@@ -17,6 +17,36 @@ public interface motifGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMain(motifGrammarParser.MainContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link motifGrammarParser#motif}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMotif(motifGrammarParser.MotifContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link motifGrammarParser#seriesMotif}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSeriesMotif(motifGrammarParser.SeriesMotifContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link motifGrammarParser#orMotif}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrMotif(motifGrammarParser.OrMotifContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link motifGrammarParser#loopMotif}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLoopMotif(motifGrammarParser.LoopMotifContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link motifGrammarParser#loopNumber}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLoopNumber(motifGrammarParser.LoopNumberContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link motifGrammarParser#linearMotif}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -95,6 +125,12 @@ public interface motifGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link motifGrammarParser#durationSpec}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDurationSpec(motifGrammarParser.DurationSpecContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link motifGrammarParser#duration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -112,4 +148,10 @@ public interface motifGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSimpleDuration(motifGrammarParser.SimpleDurationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link motifGrammarParser#mute}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMute(motifGrammarParser.MuteContext ctx);
 }

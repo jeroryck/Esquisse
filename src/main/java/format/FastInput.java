@@ -40,7 +40,7 @@ public class FastInput {
     }
 
     // Construct Motifs from a string specification
-    public static Motif durationMotifFromString(String s){
+    public static Motif motifFromString(String s){
 
         CharStream sourceStream = CharStreams.fromString(s);
         motifGrammarLexer lexer = new motifGrammarLexer(sourceStream);
@@ -58,9 +58,9 @@ public class FastInput {
 //---------------------------------------------------------------------------------------------------------------------
 
     public static void main(String[] args) {
-        String testString = "(32 [32 4] 4)";
+        String testString = "(32  [32 4] 4)";
 
-        Motif<Duration> result = durationMotifFromString(testString);
+        Motif<Duration> result = motifFromString(testString);
 
         result.start();
         for (int i = 0; i < 50; i++) {
@@ -70,7 +70,17 @@ public class FastInput {
         }
 
         testString = "(cis.o2 e ais.o-)";
-        Motif<Pitch> resultP = durationMotifFromString(testString);
+        Motif<Pitch> resultP = motifFromString(testString);
+
+        resultP.start();
+        for (int i = 0; i < 50; i++) {
+            if (!resultP.hasNext()) break;
+            resultP.next();
+            System.out.println(resultP.currentValue.index);
+        }
+
+        testString = "(LOOP 2 (cis.o2 e ais.o-))";
+        resultP = motifFromString(testString);
 
         resultP.start();
         for (int i = 0; i < 50; i++) {
