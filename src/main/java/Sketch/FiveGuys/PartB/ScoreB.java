@@ -83,13 +83,10 @@ public class ScoreB {
         //-------------------------------------------------------------------------------------------
         // Violin 2 part
 
-        List<Duration> bMDV2a1 = FastInput.dur(new int[]{CROCHE,CROCHE,CROCHE,CROCHE});
-        LoopMotif MDV2a1 = new LoopMotif<Duration>(new LinearMotif<Duration>(bMDV2a1),2);
-        List<Duration> bMDV2b1 = FastInput.dur(new int[]{CROCHE,NOIRE+CROCHE});
-        LoopMotif MDV2b1 = new LoopMotif<Duration>(new LinearMotif<Duration>(bMDV2b1),2);
-        OrMotif<Duration> MDV2c = new OrMotif<Duration>(new Motif[]{
-                new LinearMotif<Duration>(bMDV2a1)  , new LinearMotif<Duration>(bMDV2b1)});
+        String durV2spec = "(LOOP 3000 (OR (8 mute 8 8 8) (8 mute [4  8])))";
+        Motif<Duration> durV2Motif = FastInput.motifFromString(durV2spec);
 
+        String hpV2spec = "()";
 
     }
 

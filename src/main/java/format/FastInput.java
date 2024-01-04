@@ -58,7 +58,7 @@ public class FastInput {
 //---------------------------------------------------------------------------------------------------------------------
 
     public static void main(String[] args) {
-        String testString = "(32  [32 4] 4)";
+        String testString = "(32  [32 4] mute 4)";
 
         Motif<Duration> result = motifFromString(testString);
 

@@ -10,12 +10,18 @@ public class Scale  {
 
     PitchConstraint ambitus;
 
+    Chord baseChord;
+
     enum Way {UP,DOWN};
 
 
+    // Enumeration of the ascending scale
     public List<Pitch> pitchesUp = new ArrayList<>();
+
+    // Enumeration (upward) of the descending scale
     public List<Pitch> pitchesDown = new ArrayList<>();
 
+    // The index in the ascending scale of a given pitch (undefined if the pitch is not in the scale)
     public Optional<Integer> degreeUp(Pitch pitch) {
 
         Optional<Integer> degree =Optional.empty();
@@ -61,19 +67,12 @@ public class Scale  {
     //  Construction of the pitch list
 
     // Construct of an arpeggio of a chord
-    public List<Pitch> expandChord(Chord chord){
+    public List<Pitch> expandChord(){
 
-        List<Pitch> result = new ArrayList<>();
+        Arpeggio arpeggio = new Arpeggio(ambitus,baseChord);
+        arpeggio.populate();
 
-        // Harmonic pitch to walk through the ambitus
-        HarmonicPitch hpWalk = new HarmonicPitch(chord.getRoot(),chord);
-        while (hpWalk.lowerThan(ambitus.upperBound)){
-            if(hpWalk.greaterThan(ambitus.lowerBound))
-                result.add(new Pitch(hpWalk.asPitch()));
-            hpWalk = hpWalk.succ();
-        }
-
-        return result;
+        return arpeggio.pitches;
     }
 
     // Extrapolation of the scale between two consecutive chord tones.
@@ -115,7 +114,7 @@ public class Scale  {
     public void populate(Chord chord){
 
         // Firstly we construct the arpeggio of the chord
-        List<Pitch> skeletton = expandChord(chord);
+        List<Pitch> skeletton = expandChord();
 
         // Then we expand the scale between each pitch of the arpeggio
         if (skeletton.size()<=2)
@@ -134,15 +133,19 @@ public class Scale  {
         pitchesDown.add(skeletton.get(skeletton.size()-1));
     }
 
+    //------------------------------------------------------------------------------------------------------------
 
-    public Scale(PitchConstraint ambitus) {
+    public Scale(PitchConstraint ambitus, Chord baseChord) {
+
         this.ambitus = ambitus;
+        this.baseChord = baseChord;
     }
 
     public static void main(String[] args) {
 
-        Scale scale = new Scale(ALTO_RANGE);
+
         Chord chordTones = new Chord(new String[]{"c'", "ees'","aes'","b'"});
+        Scale scale = new Scale(ALTO_RANGE, chordTones);
         scale.populate(chordTones);
 
         System.out.println("Ascending");
@@ -150,8 +153,10 @@ public class Scale  {
             System.out.println(scale.pitchesUp.get(i).asString());
         }
         System.out.println("Descending");
+        System.out.println("lower bound :"+(new Pitch(scale.ambitus.lowerBound)).asString());
         for (int i = 0; i < scale.pitchesDown.size(); i++) {
             System.out.println(scale.pitchesDown.get(i).asString());
         }
+        System.out.println("upper bound :"+(new Pitch(scale.ambitus.upperBound)).asString());
     }
 }

@@ -4,7 +4,7 @@ import java.util.Random;
 
 import static Concepts.Pitch.REST;
 
-public class HarmonicPitch implements Sound{
+public class HarmonicPitch implements Sound, Movable{
 
     int degree;
     int octave;
@@ -131,7 +131,7 @@ public class HarmonicPitch implements Sound{
         System.out.println(" octave :"+this.octave+" degré :"+this.degree);
     }
 
-    // A inner class for coding the application of succ (positive move) or pred (negative move)
+    // An inner class for coding the application of succ (positive move) or pred (negative move)
     public static class Move {
         int coding;
         public HarmonicPitch apply(HarmonicPitch hp){
@@ -161,7 +161,7 @@ public class HarmonicPitch implements Sound{
         this.degree = -1;
         // Search the degree
         for (int i = 0; i < context.pitchs.length; i++) {
-            if ((pitch %12) == (context.pitchs[i]))
+            if ((pitch %12) == (context.pitchs[i])%12)
                 degree = i;
         }
         if (degree==-1)  throw new RuntimeException("pitch out of chord : HarmonicPitch constructor failed");

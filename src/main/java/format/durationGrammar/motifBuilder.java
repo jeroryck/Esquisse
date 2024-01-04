@@ -34,7 +34,7 @@ public class motifBuilder extends motifGrammarBaseVisitor {
     @Override
     public Duration visitDurationSpec(motifGrammarParser.DurationSpecContext ctx) {
         Duration duration = (Duration) visit(ctx.duration());
-
+        if (!(ctx.mute()==null)) duration.mute = true;
         return duration;
     }
 

@@ -74,7 +74,7 @@ public  class Melismer {
 
         Melismer melismer = new Melismer();
         melismer.durationUnit = CROCHE;
-        Scale scale = new Scale(VIOLIN_RANGE);
+        Scale scale = new Scale(VIOLIN_RANGE, chordTones);
         scale.populate(chordTones);
         melismer.scale = scale;
 
