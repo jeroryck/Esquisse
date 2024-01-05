@@ -146,7 +146,7 @@ loopNumber
 linearMotif
 linearMotifDuration
 linearMotifPitch
-linearMotifPitchMove
+linearMotifMove
 pitch
 absolutePitch
 relativePitch
@@ -154,8 +154,8 @@ simplePitch
 pitchName
 octaveNumber
 octaveModifier
-pitchMove
-pitchMoveNumber
+move
+moveNumber
 durationSpec
 duration
 compoundDuration

@@ -67,7 +67,7 @@ public class ScoreB {
             motifDurationV1.next();
 
             // decoding of the move to obtain a new harmonic pitch
-            HarmonicPitch newValue = ((HarmonicPitch.Move) motifChordTonesV1.currentValue).apply(violinChordTones.lastValue());
+            HarmonicPitch newValue = ((Move<HarmonicPitch>) motifChordTonesV1.currentValue).apply(violinChordTones.lastValue());
 
             // Apply the underlying harmony
             Chord currentHarmonyChord = underlyingHarmony.getValue(violinChordTones.length());

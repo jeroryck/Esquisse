@@ -29,18 +29,17 @@ public class motifGrammarParser extends Parser {
 	public static final int
 		RULE_main = 0, RULE_motif = 1, RULE_seriesMotif = 2, RULE_orMotif = 3, 
 		RULE_loopMotif = 4, RULE_loopNumber = 5, RULE_linearMotif = 6, RULE_linearMotifDuration = 7, 
-		RULE_linearMotifPitch = 8, RULE_linearMotifPitchMove = 9, RULE_pitch = 10, 
+		RULE_linearMotifPitch = 8, RULE_linearMotifMove = 9, RULE_pitch = 10, 
 		RULE_absolutePitch = 11, RULE_relativePitch = 12, RULE_simplePitch = 13, 
 		RULE_pitchName = 14, RULE_octaveNumber = 15, RULE_octaveModifier = 16, 
-		RULE_pitchMove = 17, RULE_pitchMoveNumber = 18, RULE_durationSpec = 19, 
-		RULE_duration = 20, RULE_compoundDuration = 21, RULE_simpleDuration = 22, 
-		RULE_mute = 23;
+		RULE_move = 17, RULE_moveNumber = 18, RULE_durationSpec = 19, RULE_duration = 20, 
+		RULE_compoundDuration = 21, RULE_simpleDuration = 22, RULE_mute = 23;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"main", "motif", "seriesMotif", "orMotif", "loopMotif", "loopNumber", 
-			"linearMotif", "linearMotifDuration", "linearMotifPitch", "linearMotifPitchMove", 
+			"linearMotif", "linearMotifDuration", "linearMotifPitch", "linearMotifMove", 
 			"pitch", "absolutePitch", "relativePitch", "simplePitch", "pitchName", 
-			"octaveNumber", "octaveModifier", "pitchMove", "pitchMoveNumber", "durationSpec", 
+			"octaveNumber", "octaveModifier", "move", "moveNumber", "durationSpec", 
 			"duration", "compoundDuration", "simpleDuration", "mute"
 		};
 	}
@@ -496,8 +495,8 @@ public class motifGrammarParser extends Parser {
 		public LinearMotifPitchContext linearMotifPitch() {
 			return getRuleContext(LinearMotifPitchContext.class,0);
 		}
-		public LinearMotifPitchMoveContext linearMotifPitchMove() {
-			return getRuleContext(LinearMotifPitchMoveContext.class,0);
+		public LinearMotifMoveContext linearMotifMove() {
+			return getRuleContext(LinearMotifMoveContext.class,0);
 		}
 		public LinearMotifContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -543,7 +542,7 @@ public class motifGrammarParser extends Parser {
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(84);
-				linearMotifPitchMove();
+				linearMotifMove();
 				}
 				break;
 			}
@@ -690,35 +689,35 @@ public class motifGrammarParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class LinearMotifPitchMoveContext extends ParserRuleContext {
-		public List<PitchMoveContext> pitchMove() {
-			return getRuleContexts(PitchMoveContext.class);
+	public static class LinearMotifMoveContext extends ParserRuleContext {
+		public List<MoveContext> move() {
+			return getRuleContexts(MoveContext.class);
 		}
-		public PitchMoveContext pitchMove(int i) {
-			return getRuleContext(PitchMoveContext.class,i);
+		public MoveContext move(int i) {
+			return getRuleContext(MoveContext.class,i);
 		}
-		public LinearMotifPitchMoveContext(ParserRuleContext parent, int invokingState) {
+		public LinearMotifMoveContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_linearMotifPitchMove; }
+		@Override public int getRuleIndex() { return RULE_linearMotifMove; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterLinearMotifPitchMove(this);
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterLinearMotifMove(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitLinearMotifPitchMove(this);
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitLinearMotifMove(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitLinearMotifPitchMove(this);
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitLinearMotifMove(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final LinearMotifPitchMoveContext linearMotifPitchMove() throws RecognitionException {
-		LinearMotifPitchMoveContext _localctx = new LinearMotifPitchMoveContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_linearMotifPitchMove);
+	public final LinearMotifMoveContext linearMotifMove() throws RecognitionException {
+		LinearMotifMoveContext _localctx = new LinearMotifMoveContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_linearMotifMove);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -732,7 +731,7 @@ public class motifGrammarParser extends Parser {
 				{
 				{
 				setState(104);
-				pitchMove();
+				move();
 				}
 				}
 				setState(107); 
@@ -1128,39 +1127,39 @@ public class motifGrammarParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class PitchMoveContext extends ParserRuleContext {
-		public PitchMoveNumberContext pitchMoveNumber() {
-			return getRuleContext(PitchMoveNumberContext.class,0);
+	public static class MoveContext extends ParserRuleContext {
+		public MoveNumberContext moveNumber() {
+			return getRuleContext(MoveNumberContext.class,0);
 		}
-		public PitchMoveContext(ParserRuleContext parent, int invokingState) {
+		public MoveContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_pitchMove; }
+		@Override public int getRuleIndex() { return RULE_move; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterPitchMove(this);
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterMove(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitPitchMove(this);
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitMove(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitPitchMove(this);
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitMove(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final PitchMoveContext pitchMove() throws RecognitionException {
-		PitchMoveContext _localctx = new PitchMoveContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_pitchMove);
+	public final MoveContext move() throws RecognitionException {
+		MoveContext _localctx = new MoveContext(_ctx, getState());
+		enterRule(_localctx, 34, RULE_move);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(132);
 			match(T__49);
 			setState(133);
-			pitchMoveNumber();
+			moveNumber();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1175,29 +1174,29 @@ public class motifGrammarParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
-	public static class PitchMoveNumberContext extends ParserRuleContext {
-		public PitchMoveNumberContext(ParserRuleContext parent, int invokingState) {
+	public static class MoveNumberContext extends ParserRuleContext {
+		public MoveNumberContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_pitchMoveNumber; }
+		@Override public int getRuleIndex() { return RULE_moveNumber; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterPitchMoveNumber(this);
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).enterMoveNumber(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitPitchMoveNumber(this);
+			if ( listener instanceof motifGrammarListener ) ((motifGrammarListener)listener).exitMoveNumber(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitPitchMoveNumber(this);
+			if ( visitor instanceof motifGrammarVisitor ) return ((motifGrammarVisitor<? extends T>)visitor).visitMoveNumber(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final PitchMoveNumberContext pitchMoveNumber() throws RecognitionException {
-		PitchMoveNumberContext _localctx = new PitchMoveNumberContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_pitchMoveNumber);
+	public final MoveNumberContext moveNumber() throws RecognitionException {
+		MoveNumberContext _localctx = new MoveNumberContext(_ctx, getState());
+		enterRule(_localctx, 36, RULE_moveNumber);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);

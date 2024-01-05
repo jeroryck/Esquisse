@@ -81,7 +81,7 @@ public class motifGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLinearMotifMove(motifGrammarParser.LinearMotifMoveContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -137,14 +137,14 @@ public class motifGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPitchMove(motifGrammarParser.PitchMoveContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMove(motifGrammarParser.MoveContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMoveNumber(motifGrammarParser.MoveNumberContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

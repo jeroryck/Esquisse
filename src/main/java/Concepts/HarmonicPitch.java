@@ -131,26 +131,6 @@ public class HarmonicPitch implements Sound, Movable{
         System.out.println(" octave :"+this.octave+" degré :"+this.degree);
     }
 
-    // An inner class for coding the application of succ (positive move) or pred (negative move)
-    public static class Move {
-        int coding;
-        public HarmonicPitch apply(HarmonicPitch hp){
-            HarmonicPitch result = hp;
-            if (coding > 0) {
-                for (int i = 0; i < coding; i++) {
-                    result = hp.succ();
-                }
-            } else {
-                for (int i = 0; i <-coding ; i++) {
-                    result = hp.pred();
-                }
-            }
-            return result;
-        }
-        public Move(int coding){
-            this.coding = coding;
-        }
-    }
 
     //------------------------------------------------------------------------------------------
     //

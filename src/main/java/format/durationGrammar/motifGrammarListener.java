@@ -98,15 +98,15 @@ public interface motifGrammarListener extends ParseTreeListener {
 	 */
 	void exitLinearMotifPitch(motifGrammarParser.LinearMotifPitchContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link motifGrammarParser#linearMotifPitchMove}.
+	 * Enter a parse tree produced by {@link motifGrammarParser#linearMotifMove}.
 	 * @param ctx the parse tree
 	 */
-	void enterLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx);
+	void enterLinearMotifMove(motifGrammarParser.LinearMotifMoveContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link motifGrammarParser#linearMotifPitchMove}.
+	 * Exit a parse tree produced by {@link motifGrammarParser#linearMotifMove}.
 	 * @param ctx the parse tree
 	 */
-	void exitLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx);
+	void exitLinearMotifMove(motifGrammarParser.LinearMotifMoveContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link motifGrammarParser#pitch}.
 	 * @param ctx the parse tree
@@ -178,25 +178,25 @@ public interface motifGrammarListener extends ParseTreeListener {
 	 */
 	void exitOctaveModifier(motifGrammarParser.OctaveModifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link motifGrammarParser#pitchMove}.
+	 * Enter a parse tree produced by {@link motifGrammarParser#move}.
 	 * @param ctx the parse tree
 	 */
-	void enterPitchMove(motifGrammarParser.PitchMoveContext ctx);
+	void enterMove(motifGrammarParser.MoveContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link motifGrammarParser#pitchMove}.
+	 * Exit a parse tree produced by {@link motifGrammarParser#move}.
 	 * @param ctx the parse tree
 	 */
-	void exitPitchMove(motifGrammarParser.PitchMoveContext ctx);
+	void exitMove(motifGrammarParser.MoveContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link motifGrammarParser#pitchMoveNumber}.
+	 * Enter a parse tree produced by {@link motifGrammarParser#moveNumber}.
 	 * @param ctx the parse tree
 	 */
-	void enterPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx);
+	void enterMoveNumber(motifGrammarParser.MoveNumberContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link motifGrammarParser#pitchMoveNumber}.
+	 * Exit a parse tree produced by {@link motifGrammarParser#moveNumber}.
 	 * @param ctx the parse tree
 	 */
-	void exitPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx);
+	void exitMoveNumber(motifGrammarParser.MoveNumberContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link motifGrammarParser#durationSpec}.
 	 * @param ctx the parse tree

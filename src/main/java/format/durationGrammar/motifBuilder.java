@@ -2,6 +2,7 @@ package format.durationGrammar;
 
 import Concepts.Duration;
 import Concepts.HarmonicPitch;
+import Concepts.Move;
 import Concepts.Pitch;
 import Utils.Motifs.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -115,15 +116,15 @@ public class motifBuilder extends motifGrammarBaseVisitor {
 
 
     @Override
-    public Motif<HarmonicPitch.Move> visitLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx) {
+    public Motif<Move> visitLinearMotifMove(motifGrammarParser.LinearMotifMoveContext ctx) {
 
-        List<HarmonicPitch.Move> pitchMoves = new ArrayList<>();
-        for (int i = 0; i < ctx.pitchMove().size(); i++) {
-            int intMove = Integer.valueOf(ctx.pitchMove(i).pitchMoveNumber().getText());
-            pitchMoves.add(i,new HarmonicPitch.Move(intMove));
+        List<Move> moves = new ArrayList<>();
+        for (int i = 0; i < ctx.move().size(); i++) {
+            int intMove = Integer.valueOf(ctx.move(i).moveNumber().getText());
+            moves.add(i,new Move(intMove));
         }
 
-        return new LinearMotif<HarmonicPitch.Move>(pitchMoves);
+        return new LinearMotif<Move>(moves);
     }
 
     // Compound motifs

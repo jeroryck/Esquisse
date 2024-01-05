@@ -16,12 +16,12 @@ loopNumber : '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
 
 linearMotif : linearMotifDuration
             | linearMotifPitch
-            | linearMotifPitchMove
+            | linearMotifMove
             ;
 
 linearMotifDuration : '(' durationSpec+ ')';
 linearMotifPitch : '(' pitch+ ')';
-linearMotifPitchMove : '(' pitchMove+ ')';
+linearMotifMove : '(' move+ ')';
 
 // pitch
 //-----------------------------------------------------------------------------------------------------
@@ -46,11 +46,11 @@ pitchName : 'a' | 'aes' | 'ais'
 octaveNumber : 'o0' | 'o1' | 'o2' | 'o3' | 'o4' | 'o5' | 'o6' | 'o7';
 octaveModifier : 'o+' | 'o++' | 'o-' | 'o--';
 
-// pitch Move
+//  Move
 //-------------------------------------------------------------------------------------------------------------
 
-pitchMove : 'm' pitchMoveNumber;
-pitchMoveNumber : '-7' | '-6' | '-5' | '-4' | '-3' | '-2' | '-1' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' ;
+move : 'm' moveNumber;
+moveNumber : '-7' | '-6' | '-5' | '-4' | '-3' | '-2' | '-1' | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' ;
 
 // duration
 //--------------------------------------------------------------------------------------------------------------

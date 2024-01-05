@@ -125,13 +125,13 @@ public class motifGrammarBaseListener implements motifGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx) { }
+	@Override public void enterLinearMotifMove(motifGrammarParser.LinearMotifMoveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx) { }
+	@Override public void exitLinearMotifMove(motifGrammarParser.LinearMotifMoveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -221,25 +221,25 @@ public class motifGrammarBaseListener implements motifGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPitchMove(motifGrammarParser.PitchMoveContext ctx) { }
+	@Override public void enterMove(motifGrammarParser.MoveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPitchMove(motifGrammarParser.PitchMoveContext ctx) { }
+	@Override public void exitMove(motifGrammarParser.MoveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx) { }
+	@Override public void enterMoveNumber(motifGrammarParser.MoveNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx) { }
+	@Override public void exitMoveNumber(motifGrammarParser.MoveNumberContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

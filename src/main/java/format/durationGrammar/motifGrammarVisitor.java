@@ -65,11 +65,11 @@ public interface motifGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLinearMotifPitch(motifGrammarParser.LinearMotifPitchContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link motifGrammarParser#linearMotifPitchMove}.
+	 * Visit a parse tree produced by {@link motifGrammarParser#linearMotifMove}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLinearMotifPitchMove(motifGrammarParser.LinearMotifPitchMoveContext ctx);
+	T visitLinearMotifMove(motifGrammarParser.LinearMotifMoveContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link motifGrammarParser#pitch}.
 	 * @param ctx the parse tree
@@ -113,17 +113,17 @@ public interface motifGrammarVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOctaveModifier(motifGrammarParser.OctaveModifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link motifGrammarParser#pitchMove}.
+	 * Visit a parse tree produced by {@link motifGrammarParser#move}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPitchMove(motifGrammarParser.PitchMoveContext ctx);
+	T visitMove(motifGrammarParser.MoveContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link motifGrammarParser#pitchMoveNumber}.
+	 * Visit a parse tree produced by {@link motifGrammarParser#moveNumber}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPitchMoveNumber(motifGrammarParser.PitchMoveNumberContext ctx);
+	T visitMoveNumber(motifGrammarParser.MoveNumberContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link motifGrammarParser#durationSpec}.
 	 * @param ctx the parse tree
