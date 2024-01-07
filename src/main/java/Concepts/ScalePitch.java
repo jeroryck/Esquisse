@@ -1,79 +1,89 @@
 package Concepts;
 
-public class ScalePitch implements Sound, Movable{
+import java.util.Arrays;
 
+import static Concepts.Mode.MAJOR;
+import static Concepts.PitchConstraint.VIOLIN_RANGE;
+
+public class ScalePitch implements Movable{
+
+    // A scale pitch is a pitch that can take its value only form a scale.
+    // It's possible to go up or down, to walk among the scale
+
+    // The scale the values go from
+    private Scale scale;
+
+    // The index of the pitch in the scale.pitches list
     private int index;
 
-    // The octave of the pitch (absolute value)
-    private int octave;
-    public int getOctave() {
-        return octave;
-    }
-    public void setOctave(int octave) {
-        this.octave = octave;
+    // The octave of the ScalePitch
+    public int octave(){
+       return scale.pitches.get(index).index/12;
     }
 
-    // The degree of the pitch in the scale
-    private int degre;
-    public int getDegre() {
-        return degre;
+    // The degree of the scale : we retrieve the pitch class and find its index in the pitchClassDegrees of the scale
+    public int degree(){
+        int pitchClass = scale.pitches.get(index).index%12;
+        int degree = Arrays.asList(scale.pitchClassDegrees).indexOf(pitchClass);
+        if (degree!=-1) return degree;
+        else throw new RuntimeException("error in Scale Pitch degree");
     }
 
-    public void setDegre(int degre) {
-        this.degre = degre;
+    public Pitch asPitch(){
+        return scale.pitches.get(index);
     }
-
-
-
-
 
     //-----------------------------------------------------------------------------------------------------------------
-
+    //
+    // Implementation of the Movable interface
 
     @Override
     public Movable succ() {
-        return null;
+        ScalePitch result = new ScalePitch();
+        if (index < scale.pitches.size()-1) {
+            result.scale= this.scale;
+            result.index = this.index+1;
+            return result;
+        }
+        else throw new RuntimeException("ScalePitch has no successor "+this.asPitch().asString());
     }
 
     @Override
     public Movable pred() {
-        return null;
+        ScalePitch result = new ScalePitch();
+        if (index > 0) {
+            result.scale= this.scale;
+            result.index = this.index-1;
+            return result;
+        }
+        else throw new RuntimeException("ScalePitch has no predecessor "+this.asPitch().asString());
     }
 
-    //-------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
+    //
+    // the  constructor is used by the succ and pred methods
+    // Otherwise to create Scale pitch, use the createScalePitch method of the scale class
 
-    @Override
-    public String asString() {
-        return null;
+    private ScalePitch(){}
+
+    public ScalePitch(int octave, int degree,Scale scale){
+        this.scale = scale;
+
+        // search of index : the position of the corresponding pitch in the list of pitch of the scale
+        int searchIndexPitch = octave*12 + scale.pitchClassDegrees[degree];
+        index = -1;
+        for (int i = 0; i < scale.pitches.size(); i++) {
+            if (scale.pitches.get(i).index == searchIndexPitch) this.index =i;
+        }
+        if (index==-1) throw new RuntimeException("Bad spec for Scale pitch constraint octave "+octave+" degree "+degree);
     }
 
-    @Override
-    public Sound silentValue() {
-        return null;
-    }
+    public static void main(String[] args) {
 
-    @Override
-    public Sound transpose(int decal) {
-        return null;
-    }
+        // Generate D Major
+        Scale dMajor= new Scale(MAJOR,2, VIOLIN_RANGE);
 
-    @Override
-    public Sound makeLowerThan(int indexPitch) {
-        return null;
-    }
-
-    @Override
-    public Sound makeGreaterThan(int indexPitch) {
-        return null;
-    }
-
-    @Override
-    public Boolean lowerThan(int indexPitch) {
-        return null;
-    }
-
-    @Override
-    public Boolean greaterThan(int indexPitch) {
-        return null;
+       ScalePitch sp = new ScalePitch(4,2,dMajor);
+       System.out.println(sp.asPitch().asString());
     }
 }

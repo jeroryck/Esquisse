@@ -1,21 +1,17 @@
 package Components.MelodyGenerator;
 
 import Concepts.*;
-import Utils.PermutationGenerator;
 import Utils.RandomWalk;
 import format.MasterOfFiles;
 
-import java.security.PublicKey;
 import java.util.List;
-import java.util.Optional;
 
 import static Concepts.Duration.*;
-import static Concepts.PitchConstraint.ALTO_RANGE;
 import static Concepts.PitchConstraint.VIOLIN_RANGE;
 
 public  class Melismer {
 
-    public Scale scale;
+    public ScaleDeprecated scale;
 
     public Integer durationUnit;
 
@@ -74,7 +70,7 @@ public  class Melismer {
 
         Melismer melismer = new Melismer();
         melismer.durationUnit = CROCHE;
-        Scale scale = new Scale(VIOLIN_RANGE, chordTones);
+        ScaleDeprecated scale = new ScaleDeprecated(VIOLIN_RANGE, chordTones);
         scale.populate(chordTones);
         melismer.scale = scale;
 
