@@ -80,36 +80,29 @@ public class Quintet {
         Integer stepSizeH = 7*BLANCHE ;
 
         // Setup of the series
-        Harmony seriesOfBaseChordRaw = new Harmony();
-        seriesOfBaseChordRaw.heights = new Chord[]{baseA, baseB,baseC,baseD,baseE,baseF,baseG,baseH};
-        seriesOfBaseChordRaw.stepRanges = new Integer[9];
+        //  Of the base chords
+        Harmony seriesOfBaseChord = new Harmony();
+        seriesOfBaseChord.heights = new Chord[]{baseA, baseB,baseC,baseD,baseE,baseF,baseG,baseH};
+        seriesOfBaseChord.stepRanges = new Integer[9];
 
-        IntegersTimeSerie possibleMovesSeriesRaw = new IntegersTimeSerie();
-        possibleMovesSeriesRaw.heights = new Integer[][]
+        // Of the possible moves
+        IntegersTimeSerie possibleMovesSeries = new IntegersTimeSerie();
+        possibleMovesSeries.heights = new Integer[][]
                        {possibleMovesA,possibleMovesB,possibleMovesC,
                         possibleMovesD,possibleMovesE,possibleMovesF,possibleMovesG,possibleMovesH};
-        possibleMovesSeriesRaw.stepRanges = new Integer[9];
+        possibleMovesSeries.stepRanges = new Integer[9];
 
-        StaircaseFunction stepSizeFunctionRaw = new StaircaseFunction();
-        stepSizeFunctionRaw.heights = new Integer[]{stepSizeA,stepSizeB,stepSizeC,stepSizeD,
+        StaircaseFunction stepSizeFunction = new StaircaseFunction();
+        stepSizeFunction.heights = new Integer[]{stepSizeA,stepSizeB,stepSizeC,stepSizeD,
                                                     stepSizeE,stepSizeF,stepSizeG,stepSizeH};
-        stepSizeFunctionRaw.stepRanges = new Integer[9];
+        stepSizeFunction.stepRanges = new Integer[9];
 
         // Each chunk lasts one minute
         for (int i = 0; i < 9; i++) {
-            seriesOfBaseChordRaw.stepRanges[i]=i*60*Duration.second();
-            possibleMovesSeriesRaw.stepRanges[i]=i*60*Duration.second();
-            stepSizeFunctionRaw.stepRanges[i]=i*60*Duration.second();
+            seriesOfBaseChord.stepRanges[i]=i*60*Duration.second();
+            possibleMovesSeries.stepRanges[i]=i*60*Duration.second();
+            stepSizeFunction.stepRanges[i]=i*60*Duration.second();
         }
-
-        // These raw series is blurred
-        chordBlurring = new Blurring<>(0.15, 0.1);
-        Harmony seriesOfBaseChord = (Harmony) chordBlurring.blur(seriesOfBaseChordRaw);
-        integersTimeSerieBlurring = new Blurring<>(0.15,0.1);
-        IntegersTimeSerie possibleMovesSeries = (IntegersTimeSerie)
-                integersTimeSerieBlurring.blur( possibleMovesSeriesRaw);
-        stepSizeBlurring = new Blurring<>(0.15,0.1);
-        StaircaseFunction stepSizeFunction = (StaircaseFunction) stepSizeBlurring.blur(stepSizeFunctionRaw);
 
         // 2. Generation of the  chord series, using "DrivenChordSuite" with seriesOfBaseChord as driver
         DrivenChordSuite chordSeries = new DrivenChordSuite();

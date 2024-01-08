@@ -83,12 +83,8 @@ public class ScoreA {
         Chord model = new Chord(new String[]{"g,  ","g  ","c'  ","g' "});
         Harmony smoothHarmA = smoothVoicer.addVoicings(underlyingHarmony,model);
 
-        // b. Split into parts and fuzzification
+        // b. Split into parts
         Phrase[] stringParts = smoothHarmA.asPhrases();
-        Fuzzyfier fuzzyfier = new Fuzzyfier(0.6,NOIRE);
-        for (int i = 0; i < stringParts.length; i++) {
-            fuzzyfier.fuzzyfy(stringParts[i]);
-        }
         cello = new SoundPhrase(stringParts[0]);
         alto = new SoundPhrase(stringParts[1]);
         violin2 = new SoundPhrase(stringParts[2]);
